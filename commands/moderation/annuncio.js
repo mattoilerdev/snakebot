@@ -21,7 +21,7 @@ module.exports = {
         if (!testo) {
             return message.channel.send({embeds: [user]});
         }
-        if (!message.member.permissions.cache.has("ADMINISTRATOR")) {                                                            
+        if (!message.member.permissions.has("ADMINISTRATOR")) {                                                            
             return message.channel.send({embeds: [lolo]});
         }
 
@@ -29,7 +29,7 @@ module.exports = {
 
         let embed = new Discord.MessageEmbed()
             .setTitle(`<a:Pin:1083801456102080702> **__ANNUNCIO__** <a:Pin:1083801456102080702>`)
-            .setDescription(`${message.author.toString()} _ ha pubblicato il seguente annuncio_ \n: **_`+ testo + "_**")
+            .setDescription(`${message.author.toString()} _ ha pubblicato il seguente annuncio_ \n\n **_`+ testo + "_**")
             .setColor("#0003ff")
             .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)      
     

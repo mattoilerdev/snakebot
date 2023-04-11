@@ -20,7 +20,7 @@ module.exports = {
         .setColor("#992d22")
         .setFooter(`${message.author.username} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
 
-        if(!message.member.permissions.cache.has("ADMINISTRATOR")) {
+        if(!message.member.permissions.has("ADMINISTRATOR")) {
             return message.channel.send({ embeds: [lolo] })
         }
         if (!testo) {
