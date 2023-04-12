@@ -1,5 +1,5 @@
 module.exports = {
-    name: "uban",
+    name: "ban",
     execute(message) {
         var currentDate = new Date()
         let iuser = message.mentions.members.first()
