@@ -3,6 +3,34 @@ module.exports = {
     execute(message) {
         var currentDate = new Date()
         let iuser = message.mentions.members.first()
+        const args = message.content.split(/\s+/);
+        let motivoban;
+        motivoban = args.slice(2).join(" ");
+
+        let lolo5 = new Discord.MessageEmbed()
+        .setTitle("<a:banned:1083791739606810704> **__UTENTE BANNATO__** <a:banned:1083791739606810704>")
+        .setDescription(`**Bannato da:** ${message.member.toString()}\n**Durata:** Permanente\n**Motivo:** ${motivoban}`)
+        .setColor("#992d22")
+        .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+
+        let lolo6 = new Discord.MessageEmbed()
+        .setTitle("<a:banned:1083791739606810704> **__UTENTE BANNATO__** <a:banned:1083791739606810704>")
+        .setDescription(`**Bannato da:** ${message.member.toString()}\n**Durata:** Permanente\n**Motivo:** non definito`)
+        .setColor("#992d22")
+        .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+
+        let lolo3 = new Discord.MessageEmbed()
+        .setTitle("<a:banned:1083791739606810704> **__SEI STATO BANNATO__** <a:banned:1083791739606810704>")
+        .setDescription(`**Bannato da:** ${message.member.toString()}\n**Durata:** Permanente\n**Motivo:** ${motivoban}`)
+        .setColor("#992d22")
+        .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+
+        let lolo4 = new Discord.MessageEmbed()
+        .setTitle("<a:banned:1083791739606810704> **__SEI STATO BANNATO__** <a:banned:1083791739606810704>")
+        .setDescription(`**Bannato da:** ${message.member.toString()}\n**Durata:** Permanente\n**Motivo:** non specificato`)
+        .setColor("#992d22")
+        .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+
         let lolo = new Discord.MessageEmbed()
         .setTitle("<a:Attenzione_Gif:1083801350481125459> **__$nake BOT__** <a:Attenzione_Gif:1083801350481125459>")
         .setDescription("<a:verifyred:1084425689853329469> _Non hai il permesso di bannare questo utente!_")
@@ -25,16 +53,21 @@ module.exports = {
         if (!iuser) {
             return message.channel.send({embeds: [user]});
 }
-
-        iuser.ban()
+if(!motivoban) {
     
-                let embed = new Discord.MessageEmbed()
-                    .setTitle("<a:banned:1083791739606810704> **__UTENTE BANNATO__** <a:banned:1083791739606810704>")
-                    .setDescription(iuser.toString() + " _è stato bannato da_ " + message.author.toString())
-                    .setColor("#0003ff")
-                    .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
-                    
-                message.channel.send({ embeds: [embed] })
+    return iuser.send({embeds: [lolo4]})
+    
+    
+}if (!motivoban) {
+    iuser.ban()
+    return message.channel.send({embeds: [lolo5]})
+} else {
+    iuser.send({embeds: [lolo3]})
+    message.channel.send({embeds: [lolo6]})
+    message.guild.members.ban(iuser, {reason: `${motivoban}`})
+}
+
+
                 message.delete()
 
     }

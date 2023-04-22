@@ -29,7 +29,7 @@ module.exports = {
             return message.channel.send({embeds: [user]});
         }
         else {
-            trycatch(() => { message.channel.send({embeds: [user]}) })
+           message.channel.send({embeds: [user]})
         }
 
         message.guild.members.unban(idUtente)

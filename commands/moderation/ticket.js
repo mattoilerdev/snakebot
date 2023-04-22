@@ -67,7 +67,7 @@ const value = collected.values[0]
 
 if(value === 'first_option')  {
 const interaction = collected
-    if (interaction.guild.channels.cache.find(canale => canale.topic == `User ID: ${interaction.user.id}`)) {
+    if (interaction.guild.channels.cache.find(canale => canale.topic == `Supporto: ${interaction.user.username}`)) {
        return interaction.user.send("Hai gia un ticket aperto").catch(() => { }) 
     }
 
@@ -141,7 +141,7 @@ canalego.send({ embeds: [aperturaticket], components: [row1]})
   }
   if(value === 'second_option') {
     const interaction = collected
-    if (interaction.guild.channels.cache.find(canale => canale.topic == `User ID: ${interaction.user.id}`)) {
+    if (interaction.guild.channels.cache.find(canale => canale.topic == `Shop: ${interaction.user.username}`)) {
         return interaction.user.send("Hai gia un ticket aperto").catch(() => { }) 
      }
  
@@ -210,7 +210,7 @@ canalego.send({ embeds: [aperturaticket], components: [row1]})
 
 if(value === 'third_option')  {
     const interaction = collected
-        if (interaction.guild.channels.cache.find(canale => canale.topic == `User ID: ${interaction.user.id}`)) {
+        if (interaction.guild.channels.cache.find(canale => canale.topic == `Partnership: ${interaction.user.username}`)) {
            return interaction.user.send("Hai gia un ticket aperto").catch(() => { }) 
         }
     
@@ -275,7 +275,7 @@ if(value === 'third_option')  {
 
 if(value === 'fourth_option')  {
     const interaction = collected
-        if (interaction.guild.channels.cache.find(canale => canale.topic == `User ID: ${interaction.user.id}`)) {
+        if (interaction.guild.channels.cache.find(canale => canale.topic == `Candidature: ${interaction.user.username}`)) {
            return interaction.user.send("Hai gia un ticket aperto").catch(() => { }) 
         }
     

@@ -2,11 +2,13 @@ const Discord = require("discord.js");
 const client = new Discord.Client({ intents: 3276799 });
 const config = require('./config.json')
 const prefix = "!" 
-
+const guildsnake = ("960106570451128320")
 client.on("ready", () => {
     console.log("BOT IS READY TO FUCK UR MOM")
     client.channels.cache.get("1091330042417664030").send("!wash 100")
     client.channels.cache.get("1091331491516129361").send("!wash 100")
+    const counter = client.channels.cache.get("1091384326085681322")
+    counter.setName(`| 👤 | Utenti : ${client.guilds.cache.get("960106570451128320").memberCount}`)
     setTimeout(() => {
         client.channels.cache.get("1091330042417664030").send("!jki")
         client.channels.cache.get("1091331491516129361").send("!rrpanel")
@@ -18,11 +20,12 @@ client.on("ready", () => {
     "! server / ! user",
     " by 𝗠 𝗮 𝘁 𝘁 𝗼 𝗶 𝗹. / v. 13.14.0 ",
     "! server / ! user",
+    " by 𝗠 𝗮 𝘁 𝘁 𝗼 𝗶 𝗹. / v. 13.14.0 ",
     ];
   
   client.on("ready", () => {
   setInterval(() => {
-      const index_status = Math.floor(Math.random() * ((status_list.length - 1) + 1) - 1);
+      const index_status = Math.floor(Math.random() * ((status_list.length - 1) + 1 -1 +1));
       client.user.setActivity(status_list[index_status], {type: 'WATCHING'})
   }, 5000);
 })
@@ -35,6 +38,25 @@ client.on("ready", () => {
    // debug: true
 //});
 
+//module.exports = client => {
+   // process.removeAllListeners();
+    //process.on('unhandleRejection', (reason, p) => {
+      //console.log('[ANTI-CRASH] - Error');
+     // console.log(reason, p)
+    //});
+  
+   // process.on('uncaughtException', (err, origin) => {
+    //  console.log('[ANTI-CRASH] - Error');
+    //  console.log(err, origin)
+    ///});
+  
+   // process.on('uncaughtExceptionMonitor', (err, origin) => {
+    //  console.log('[ANTI-CRASH] - Error');
+    //  console.log(err, origin)
+    //});
+  
+    //process.on('multipleResolves', () => {})
+  //}
 
 
 //client.once('ready', async () => {
@@ -42,12 +64,6 @@ client.on("ready", () => {
         //type: "WATCHING"
     //}) 
 //});
-
-
-
-
-
-
 
 //MODULE.EXPORTTT
 
@@ -1257,10 +1273,437 @@ client.on("interactionCreate", async (interaction) => {
 //})
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+client.on("messageCreate", message => {
+    if (message.channel.type == "DM") return
 
+    if (message.member.roles.cache.has("1091323090476220489")) return
+    if (message.member.id === client.user.id) return 
+    if (message.member.id === message.channel.guild.ownerId) return
+
+    var parolacce = ["negro", "http", "https", "discord.gg"]
+    var trovata = false;
+    var testo = message.content;
+
+    parolacce.forEach(parola => {
+        if (message.content.toLowerCase().includes(parola.toLowerCase())) {
+            trovata = true;
+        }
+    })
+
+    if (trovata) {
+        message.delete();
+        var embed = new Discord.MessageEmbed()
+            .setTitle("Hai detto una parolaccia")
+            .setDescription("Hai scritto un messaggio con parole bloccate")
+
+        message.channel.send({ embeds: [embed] })
+    }
+})
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const { DisTube } = require("distube")
+//Plugin facoltativi
+const { SpotifyPlugin } = require("@distube/spotify")
+const { SoundCloudPlugin } = require("@distube/soundcloud")
 
-//////////////////
+const distube = new DisTube(client, {
+    youtubeDL: false,
+    plugins: [new SpotifyPlugin(), new SoundCloudPlugin()],
+    leaveOnEmpty: true,
+    leaveOnStop: true
+})
+
+distube.on('error', (channel, e) => {
+    if (channel) console.error(e)
+
+})
+
+client.on("messageCreate", message => {
+    if (message.content.startsWith("!play")) {
+        const voiceChannel = message.member.voice.channel
+        if (!voiceChannel) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANALE NON VALIDO__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessun canale vocale trovato:")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if (voiceChannelBot && voiceChannel.id != voiceChannelBot.id) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANALE NON VALIDO__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessun canale vocale trovato:")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        let args = message.content.split(/\s+/)
+        let query = args.slice(1).join(" ")
+
+        if (!query) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANZONE NON VALIDA__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessuna canzone trovata_")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        distube.play(voiceChannelBot || voiceChannel, query, {
+            member: message.member,
+            textChannel: message.channel,
+            message: message
+        })
+    }
+
+    if (message.content == "!pause") {
+        const voiceChannel = message.member.voice.channel
+        if (!voiceChannel) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANALE NON VALIDO__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessun canale vocale trovato:")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if (voiceChannelBot && voiceChannel.id != voiceChannelBot.id) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__IMPOSSIBILE RIPRODURRE__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Qualcun'altro sta ascoltando la musica_")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        try {
+            distube.pause(message)
+                .catch(() => { return message.channel.send("Nessuna canzone in riproduzione o canzone già in pausa") })
+        } catch {
+            return message.channel.send("Nessuna canzone in riproduzione o canzone già in pausa")
+        }
+
+        let embed = new Discord.MessageEmbed()
+        .setTitle("**__CANZONE STOPPATA__**")
+        .setDescription("_Canzone stoppata_")
+        .setColor("#0003ff")
+        .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+         message.channel.send({ embeds: [embed] })
+    }
+
+    if (message.content == "!resume") {
+        const voiceChannel = message.member.voice.channel
+        if (!voiceChannel) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANALE NON VALIDO__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessun canale vocale trovato:")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if (voiceChannelBot && voiceChannel.id != voiceChannelBot.id) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__IMPOSSIBILE RIPRODURRE__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Qualcun'altro sta ascoltando la musica_")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        try {
+            distube.resume(message)
+                .catch(() => { return message.channel.send("Nessuna canzone in riproduzione o canzone già in riproduzione") })
+        } catch {
+            return message.channel.send("Nessuna canzone in riproduzione o canzone già in riproduzione")
+        }
+
+        let embed = new Discord.MessageEmbed()
+        .setTitle("**__CANZONE RIPRESA__**")
+        .setDescription("_Canzone ripresa_:")
+        .setColor("#0003ff")
+        .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+         message.channel.send({ embeds: [embed] })
+    }
+
+    if (message.content == "!queue") {
+        const voiceChannel = message.member.voice.channel
+        if (!voiceChannel) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANALE NON VALIDO__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessun canale vocale trovato:")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if (voiceChannelBot && voiceChannel.id != voiceChannelBot.id) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__IMPOSSIBILE RIPRODURRE__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Qualcun'altro sta ascoltando la musica_")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        let queue = distube.getQueue(message)
+
+        if (!queue) return message.channel.send("Coda vuota")
+
+        let totPage = Math.ceil(queue.songs.length / 10)
+        let page = 1
+
+        let songsList = ""
+        for (let i = 10 * (page - 1); i < 10 * page; i++) {
+            if (queue.songs[i]) {
+                songsList += `${i + 1}. **${queue.songs[i].name.length <= 100 ? queue.songs[i].name : `${queue.songs[i].name.slice(0, 100)}...`}** - ${queue.songs[i].formattedDuration}\r`
+            }
+        }
+
+        let embed = new Discord.MessageEmbed()
+            .addField("Queue", songsList)
+            .setFooter({ text: `Page ${page}/${totPage}` })
+
+        let button1 = new Discord.MessageButton()
+            .setLabel("Indietro")
+            .setStyle("PRIMARY")
+            .setCustomId("indietro")
+
+        let button2 = new Discord.MessageButton()
+            .setLabel("Avanti")
+            .setStyle("PRIMARY")
+            .setCustomId("avanti")
+
+        if (page == 1) button1.setDisabled()
+        if (page == totPage) button2.setDisabled()
+
+        let row = new Discord.MessageActionRow()
+            .addComponents(button1)
+            .addComponents(button2)
+
+        message.channel.send({ embeds: [embed], components: [row] })
+            .then(msg => {
+                const collector = msg.createMessageComponentCollector()
+
+                collector.on("collect", i => {
+                    i.deferUpdate()
+
+                    if (i.user.id != message.author.id) return i.reply({ content: "Questo bottone non è tuo", ephemeral: true })
+
+                    if (i.customId == "indietro") {
+                        page--
+                        if (page < 1) page = 1
+                    }
+                    if (i.customId == "avanti") {
+                        page++
+                        if (page > totPage) page = totPage
+                    }
+
+                    let songsList = ""
+                    for (let i = 10 * (page - 1); i < 10 * page; i++) {
+                        if (queue.songs[i]) {
+                            songsList += `${i + 1}. **${queue.songs[i].name.length <= 100 ? queue.songs[i].name : `${queue.songs[i].name.slice(0, 100)}...`}** - ${queue.songs[i].formattedDuration}\r`
+                        }
+                    }
+
+                    let embed = new Discord.MessageEmbed()
+                        .addField("Queue", songsList)
+                        .setFooter({ text: `Page ${page}/${totPage}` })
+
+                    let button1 = new Discord.MessageButton()
+                        .setLabel("Indietro")
+                        .setStyle("PRIMARY")
+                        .setCustomId("indietro")
+
+                    let button2 = new Discord.MessageButton()
+                        .setLabel("Avanti")
+                        .setStyle("PRIMARY")
+                        .setCustomId("avanti")
+
+                    if (page == 1) button1.setDisabled()
+                    if (page == totPage) button2.setDisabled()
+
+                    let row = new Discord.MessageActionRow()
+                        .addComponents(button1)
+                        .addComponents(button2)
+
+                    msg.edit({ embeds: [embed], components: [row] })
+                })
+            })
+    }
+
+    if (message.content == "!skip") {
+        const voiceChannel = message.member.voice.channel
+        if (!voiceChannel) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANALE NON VALIDO__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessun canale vocale trovato:")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if (voiceChannelBot && voiceChannel.id != voiceChannelBot.id) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__IMPOSSIBILE RIPRODURRE__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Qualcun'altro sta ascoltando la musica_")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        try {
+            distube.skip(message)
+                .catch(() => {
+                    let embed = new Discord.MessageEmbed()
+                    .setTitle("**__CANZONE NON TROVATA O VALIDA__**")
+                    .setDescription("<a:verifyred:1084425689853329469> _Nessuna canzone in riproduzione successiva o attuale trovata")
+                    .setColor("#992d22")
+                    .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+                    return message.channel.send({ embeds: [embed] })
+                })
+        } catch {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANZONE NON TROVATA O VALIDA__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessuna canzone in riproduzione successiva o attuale trovata")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+        let embed = new Discord.MessageEmbed()
+        .setTitle("**__CANZONE SKIPPATA__**")
+        .setDescription("La canzone è stata skippatta correttamente")
+        .setColor("#992d22")
+        .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+         message.channel.send({ embeds: [embed] })
+    }
+
+    if (message.content == "!previous") {
+        const voiceChannel = message.member.voice.channel
+        if (!voiceChannel) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANALE NON VALIDO__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessun canale vocale trovato:")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if (voiceChannelBot && voiceChannel.id != voiceChannelBot.id) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__IMPOSSIBILE RIPRODURRE__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Qualcun'altro sta ascoltando la musica_")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        try {
+            distube.previous(message)
+                .catch(() => { return message.channel.send("Nessuna canzone in riproduzione o canzone precedente non presente") })
+        } catch {
+            return message.channel.send("Nessuna canzone in riproduzione o canzone precedente non presente")
+        }
+
+        message.channel.send("Previous song")
+    }
+
+    if (message.content == "!stop") {
+        const voiceChannel = message.member.voice.channel
+        if (!voiceChannel) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__CANALE NON VALIDO__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Nessun canale vocale trovato:")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if (voiceChannelBot && voiceChannel.id != voiceChannelBot.id) {
+            let embed = new Discord.MessageEmbed()
+            .setTitle("**__IMPOSSIBILE RIPRODURRE__**")
+            .setDescription("<a:verifyred:1084425689853329469> _Qualcun'altro sta ascoltando la musica_")
+            .setColor("#992d22")
+            .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+            return message.channel.send({ embeds: [embed] })
+        }
+
+        try {
+            distube.stop(message)
+                .catch(() => { 
+                    let embed = new Discord.MessageEmbed()
+                    .setTitle("**__CANZONE NON TROVATA O VALIDA__**")
+                    .setDescription("<a:verifyred:1084425689853329469> _Nessuna canzone in riproduzione_")
+                    .setColor("#992d22")
+                    .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+                    return message.channel.send({ embeds: [embed] })
+                 })
+        } catch {
+                    let embed = new Discord.MessageEmbed()
+        .setTitle("**__CANZONE NON TROVATA O VALIDA__**")
+        .setDescription("<a:verifyred:1084425689853329469> _Nessuna canzone in riproduzione:")
+        .setColor("#992d22")
+        .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+        return message.channel.send({ embeds: [embed] })
+  
+        }
+        let embed = new Discord.MessageEmbed()
+        .setTitle("**__RIPRODUZIONE TERMINATA__**")
+        .setDescription("<a:verifyred:1084425689853329469> _La riproduzione è finita, per maggiori info:_\n!help")
+        .setColor("#0003ff")
+        .setFooter(`${message.guild.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+
+    message.channel.send({ embeds: [embed] })
+    }
+})
+
+distube.on("addSong", (queue, song) => {
+    let embed = new Discord.MessageEmbed()
+        .setTitle("**__CANZONE AGGIUNTA ALLA PLAYLIST__**")
+        .addField("Canzone:", song.name)
+        .setColor("#0003ff")
+        .setFooter(`${guildsnake.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+
+    queue.textChannel.send({ embeds: [embed] })
+})
+
+distube.on("playSong", (queue, song) => {
+    const voiceChannel = queue.voice.channel
+    let embed = new Discord.MessageEmbed()
+        .setTitle("**__CANZONE IN RIPRODUZIONE__**")
+        .addField("Canzone:", song.name)
+        .addField("Richiesta da:", song.user.toString())
+        .addField("Canale:", voiceChannel.toString())
+        .setColor("#0003ff")
+        .setFooter(`${guildsnake.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+
+    queue.textChannel.send({ embeds: [embed] })
+})
+
+distube.on("searchNoResult", (message, query) => {
+    let embed = new Discord.MessageEmbed()
+        .setTitle("**__CANZONE NON TROVATA__**")
+        .setDescription("<a:verifyred:1084425689853329469> _La canzone non è stata trovata_")
+        .setColor("#0003ff")
+        .setFooter(`${guildsnake.name} | ` + currentDate.toLocaleString() , `https://cdn.discordapp.com/attachments/1084380772774985728/1084382176092635197/48115234-6DB0-400F-BA6C-681106447C87.png`)
+
+    queue.textChannel.send({ embeds: [embed] })
+})
+///////////////////////////////////////////////////////////////////////////////
+
+//client.on("messageCreate", (message) => {
+   // if(message.channel.type === "GUILD_NEWS")
+//})
+
+
+///////////////////////////////////////////////////////////////////////////////
 client.login(config.token) 
