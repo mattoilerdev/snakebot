@@ -26,6 +26,9 @@ module.exports = {
                       value: 'first_option',
                       customId: 'supporto',
                   },
+
+
+                  
                   {
                       label: '💰・Ticket Shop',
                       description: 'Apri un Ticket Shop',
@@ -128,11 +131,6 @@ let aperturaticket = new Discord.MessageEmbed()
 .setFooter(`${interaction.guild.name} | ` + currentDate.toLocaleString() , `https://media.discordapp.net/attachments/1092203250679296030/1092203358825234432/492348D5-2E26-4F21-A4B9-A693702D8956.png?width=671&height=671`)
 
 canalego.send({ embeds: [aperturaticket], components: [row1]})
-//////////////////////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////////////////////
-
 
    })
 
