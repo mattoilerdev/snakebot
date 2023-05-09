@@ -21,6 +21,8 @@
     "discord-logs": "^2.0.1",
     "discord.js": "^13.14.0",
     "distube": "^3.3.2",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^4.4.1",
     "fs": "^0.0.1-security",
